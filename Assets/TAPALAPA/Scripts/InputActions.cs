@@ -34,8 +34,8 @@ namespace TAPALAPA.Scripts
                     ""type"": ""Value"",
                     ""id"": ""5e578c69-a093-4144-8f72-eed1ffbe8fb7"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""Normalize"",
-                    ""interactions"": ""Hold,Tap"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
