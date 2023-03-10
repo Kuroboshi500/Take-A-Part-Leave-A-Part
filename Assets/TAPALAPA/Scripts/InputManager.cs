@@ -8,6 +8,8 @@ namespace TAPALAPA.Scripts
     public class InputManager : ScriptableObject, InputActions.IPlayerActions
     {
         public event UnityAction<Vector2> PlayerMoveEvent = delegate {  };
+        
+        public event UnityAction<Vector2> PlayerLookEvent = delegate {  };
 
         public event UnityAction PlayerLeftAttackEvent = delegate { };
         
@@ -44,6 +46,11 @@ namespace TAPALAPA.Scripts
         public void OnMove(InputAction.CallbackContext context)
         {
             PlayerMoveEvent.Invoke(context.ReadValue<Vector2>());
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            PlayerLookEvent.Invoke(context.ReadValue<Vector2>());
         }
 
         public void OnLeftAttack(InputAction.CallbackContext context)

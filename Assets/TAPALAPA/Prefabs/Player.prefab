@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 96879045476705736}
   - component: {fileID: 3454199672343305878}
+  - component: {fileID: 3604011748418234709}
   - component: {fileID: 5841179826115284578}
   m_Layer: 0
   m_Name: Player
@@ -48,8 +49,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 11400000, guid: d47540a921b1742a68f51e372bda4036, type: 2}
+  inputCameraTransform: {fileID: 0}
   characterController: {fileID: 5841179826115284578}
-  movementSpeed: 10
+  movementSpeed: 5
+--- !u!114 &3604011748418234709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96879045476705737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83e46de37314be6817f68209a43a424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 11400000, guid: d47540a921b1742a68f51e372bda4036, type: 2}
+  bodyTransform: {fileID: 96879045476705736}
+  cameraTransform: {fileID: 8308312880531254535}
+  virtualCamera: {fileID: 5311768891940604913}
 --- !u!143 &5841179826115284578
 CharacterController:
   m_ObjectHideFlags: 0

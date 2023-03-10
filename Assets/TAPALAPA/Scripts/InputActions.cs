@@ -39,6 +39,15 @@ namespace TAPALAPA.Scripts
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""3e1c6376-97fc-4b06-b95c-96e10cace85a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""ScaleVector2(x=0.25,y=0.25),InvertVector2(invertX=false)"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""LeftAttack"",
                     ""type"": ""Button"",
                     ""id"": ""f518fc1a-f2a9-4ded-acc6-c8284c61d5f0"",
@@ -134,6 +143,17 @@ namespace TAPALAPA.Scripts
                     ""action"": ""RightAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b95819da-74e2-43b7-8841-d2d8dc95b66c"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -160,6 +180,7 @@ namespace TAPALAPA.Scripts
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_LeftAttack = m_Player.FindAction("LeftAttack", throwIfNotFound: true);
             m_Player_RightAttack = m_Player.FindAction("RightAttack", throwIfNotFound: true);
         }
@@ -224,6 +245,7 @@ namespace TAPALAPA.Scripts
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_LeftAttack;
         private readonly InputAction m_Player_RightAttack;
         public struct PlayerActions
@@ -231,6 +253,7 @@ namespace TAPALAPA.Scripts
             private @InputActions m_Wrapper;
             public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @LeftAttack => m_Wrapper.m_Player_LeftAttack;
             public InputAction @RightAttack => m_Wrapper.m_Player_RightAttack;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -245,6 +268,9 @@ namespace TAPALAPA.Scripts
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
                 @LeftAttack.started += instance.OnLeftAttack;
                 @LeftAttack.performed += instance.OnLeftAttack;
                 @LeftAttack.canceled += instance.OnLeftAttack;
@@ -258,6 +284,9 @@ namespace TAPALAPA.Scripts
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
                 @LeftAttack.started -= instance.OnLeftAttack;
                 @LeftAttack.performed -= instance.OnLeftAttack;
                 @LeftAttack.canceled -= instance.OnLeftAttack;
@@ -293,6 +322,7 @@ namespace TAPALAPA.Scripts
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
             void OnLeftAttack(InputAction.CallbackContext context);
             void OnRightAttack(InputAction.CallbackContext context);
         }

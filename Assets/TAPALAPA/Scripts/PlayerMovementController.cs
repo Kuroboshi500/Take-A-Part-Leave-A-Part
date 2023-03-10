@@ -1,35 +1,40 @@
-using System;
 using UnityEngine;
 
 namespace TAPALAPA.Scripts
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private InputManager inputManager;
 
         [SerializeField] private CharacterController characterController;
 
-        [SerializeField] private float movementSpeed = 10f;
+        [SerializeField] private float movementSpeed = 5f;
 
         private Vector2 _movementInput;
 
         private void OnEnable()
         {
             inputManager.PlayerMoveEvent += OnInputMove;
+
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void OnDisable()
         {
             inputManager.PlayerMoveEvent += OnInputMove;
+
+            Cursor.lockState = CursorLockMode.None;
         }
 
         private void Update()
         {
-            var movement = new Vector3
+            var movementInput = new Vector3
             {
                 x = _movementInput.x,
                 z = _movementInput.y
             };
+
+            var movement = transform.TransformVector(movementInput);
 
             characterController.SimpleMove(movement * movementSpeed);
         }
