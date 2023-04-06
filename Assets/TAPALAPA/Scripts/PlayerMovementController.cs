@@ -4,8 +4,6 @@ namespace TAPALAPA.Scripts
 {
     public class PlayerMovementController : MonoBehaviour
     {
-        // Singleton referense (discovered from the fps workshop)
-        public static PlayerMovementController instance;
 
         [SerializeField] private InputManager inputManager;
 
@@ -15,11 +13,7 @@ namespace TAPALAPA.Scripts
 
         private Vector2 _movementInput;
 
-        // enabling the singleton (discovered from the fps workshop)
-        private void Start()
-        {
-            instance = this;
-        }
+
         private void OnEnable()
         {
             inputManager.PlayerMoveEvent += OnInputMove;
