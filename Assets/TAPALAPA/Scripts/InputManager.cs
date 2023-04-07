@@ -58,6 +58,7 @@ namespace TAPALAPA.Scripts
             if (context.performed)
             {
                 PlayerLeftAttackEvent.Invoke();
+                Debug.Log(context);
             }
         }
 
@@ -66,6 +67,8 @@ namespace TAPALAPA.Scripts
             if (context.performed)
             {
                 PlayerRightAttackEvent.Invoke();
+                Debug.Log(context);
+
             }
         }
     }

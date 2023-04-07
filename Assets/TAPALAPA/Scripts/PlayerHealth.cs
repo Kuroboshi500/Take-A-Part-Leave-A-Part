@@ -11,11 +11,11 @@ public class PlayerHealth : MonoBehaviour
     public float totalHealth => _health;
     
     // Events that can be used later to trigger animations or anything similar
-    public event UnityAction onPlayerDeath;
-    public event UnityAction<int> onPlayerDamaged;
+    public event UnityAction onPlayerDeath = delegate { };
+    public event UnityAction<int> onPlayerDamaged = delegate { };
     
 
-    void playerDamaged(var attacker, float dmg)
+    void playerDamaged(GameObject attacker, float dmg)
     {
         _health -= (int)Mathf.Round(dmg);
         Debug.Log("Player Current damage taken " + dmg + "\n Current Health is: " + _health);
@@ -30,11 +30,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        EnemyWeapon.onPlayerHit += playerDamaged;
     }
     private void OnDisable()
     {
-        
+        EnemyWeapon.onPlayerHit -= playerDamaged;
     }
 
 }
