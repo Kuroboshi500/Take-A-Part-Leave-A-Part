@@ -11,9 +11,9 @@ namespace TAPALAPA.Scripts
         
         public event UnityAction<Vector2> PlayerLookEvent = delegate {  };
 
-        public event UnityAction PlayerLeftAttackEvent = delegate { };
+        public static event UnityAction PlayerLeftAttackEvent = delegate { };
         
-        public event UnityAction PlayerRightAttackEvent = delegate { };
+        public static event UnityAction PlayerRightAttackEvent = delegate { };
 
         private InputActions _inputActions;
 
@@ -58,7 +58,7 @@ namespace TAPALAPA.Scripts
             if (context.performed)
             {
                 PlayerLeftAttackEvent.Invoke();
-                Debug.Log(context);
+                Debug.Log("Left Clicked!");
             }
         }
 
@@ -67,7 +67,7 @@ namespace TAPALAPA.Scripts
             if (context.performed)
             {
                 PlayerRightAttackEvent.Invoke();
-                Debug.Log(context);
+                Debug.Log("Right clicked!");
 
             }
         }

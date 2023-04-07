@@ -23,33 +23,33 @@ namespace TAPALAPA.Scripts
 
         private void weaponCollide(Collider col)
         {
-            col.gameObject.transform.position = col.gameObject.transform.position + new Vector3(col.gameObject.transform.position.x + 5, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
+            Debug.Log("attack triggers");
+            // this transform does not work well for our purposes and just sends the arms flying
+           // col.gameObject.transform.position = col.gameObject.transform.position + new Vector3(col.gameObject.transform.position.x , col.gameObject.transform.position.y, col.gameObject.transform.position.z + 5);
             if (col.tag == "Enemy")
             {
-                Debug.Log("attack triggered");
+                Debug.Log("attack collided");
                 onEnemyHit?.Invoke(col.gameObject, baseDamage);
             }
-            col.gameObject.transform.position = col.gameObject.transform.position + new Vector3(col.gameObject.transform.position.x - 5, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
+            //col.gameObject.transform.position = col.gameObject.transform.position + new Vector3(col.gameObject.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z- 5);
         }
         
-        private void leftAttack() { weaponCollide(leftArm); }
-        private void rightAttack() { weaponCollide(rightArm); }
+        public void leftAttack() { weaponCollide(leftArm); }
+        public void rightAttack() { weaponCollide(rightArm); }
 
-        private void Start()
-        {
-            leftArm = GameObject.Find("LeftArm").GetComponent<Collider>();
-            rightArm = GameObject.Find("RightArm").GetComponent<Collider>();
 
-        }
+
+        // currently there is an issue stating that something below does not exist (NullReferenceException
+        
         private void OnEnable()
         {
-            inputManager.PlayerLeftAttackEvent += leftAttack;
-            inputManager.PlayerRightAttackEvent += rightAttack;
+            InputManager.PlayerLeftAttackEvent += leftAttack;
+            InputManager.PlayerRightAttackEvent += rightAttack;
         }
         private void OnDisable()
         {
-            inputManager.PlayerLeftAttackEvent -= leftAttack;
-            inputManager.PlayerRightAttackEvent -= rightAttack;
+            InputManager.PlayerLeftAttackEvent -= leftAttack;
+            InputManager.PlayerRightAttackEvent -= rightAttack;
         }
     }
 }

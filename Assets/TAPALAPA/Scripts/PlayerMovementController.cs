@@ -9,6 +9,8 @@ namespace TAPALAPA.Scripts
 
         [SerializeField] private CharacterController characterController;
 
+        private PlayerWeapon arms;
+
         [SerializeField] private float movementSpeed = 5f;
 
         private Vector2 _movementInput;
